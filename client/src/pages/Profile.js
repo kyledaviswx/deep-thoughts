@@ -7,16 +7,15 @@ import FriendList from '../components/FriendList';
 import Auth from '../utils/auth';
 
 const Profile = () => {
-  const { username: userParam } = useParams();
-
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam }
+  const { username } = useParams();
+  const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+    variables: { username },
   });
 
   const user = data?.me || data?.user || {};
 
   // redirect to personal profile page if username is the logged-in user's
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
     return <Navigate to="/profile" />;
   }
 
@@ -36,7 +35,7 @@ const Profile = () => {
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+          Viewing {username ? `${user.username}'s` : 'your'} profile.
         </h2>
       </div>
 
