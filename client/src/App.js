@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
 import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
+import UserProfile from './pages/Profile';
 import Signup from './pages/Signup';
 
 
@@ -43,7 +43,11 @@ function App() {
               <Route path="/" element={<Home />}/>
               <Route path="/login" element={<Login />}/>
               <Route path="/signup" element={<Signup />}/>
-              <Route path="/profile/:username" element={<Profile />}/>
+              <Route path="/profile">
+                <Route path=":username" element={<UserProfile />} />
+                <Route path="" element={<UserProfile />} />
+              </Route>
+              {/* <Route path="/profile/:username?" element={<UserProfile />}/> */}
               <Route path="/thought/:id" element={<SingleThought />}/>
               <Route path="*" element={<NoMatch />} />
             </Routes>
